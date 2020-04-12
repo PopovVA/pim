@@ -22,8 +22,8 @@ class NotesEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _titleEditingController.text = notesModel.entityBeingEdited.title;
-    _contentEditingController.text = notesModel.entityBeingEdited.content;
+    _titleEditingController.text = notesModel?.entityBeingEdited?.title ?? '';
+    _contentEditingController.text = notesModel?.entityBeingEdited?.content ?? '';
     return ScopedModel(
       model: notesModel,
       child: ScopedModelDescendant<NotesModel>(
@@ -62,7 +62,7 @@ class NotesEntry extends StatelessWidget {
                       ),
                       controller: _titleEditingController,
                       validator: (String inValue) {
-                        if (inValue == 0) {
+                        if (inValue.isEmpty) {
                           return "Please enter a title";
                         }
                         return null;
