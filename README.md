@@ -1,4 +1,4 @@
-# pim
+# PIM
 
 A new Flutter project.
 
