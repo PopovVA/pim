@@ -15,7 +15,7 @@ Future<String> selectDate(
   String dateString,
 ) async {
   DateTime initialDate = DateTime.now();
-  if (dateString.isNotEmpty) {
+  if (dateString?.isNotEmpty ?? false) {
     List<String> dateParts = dateString.split(',');
     initialDate = DateTime(
       int.parse(dateParts[0]),
