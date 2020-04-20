@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 
 import 'package:scoped_model/scoped_model.dart';
 
-import 'notes_db_worker.dart';
-import 'notes_model.dart' show NotesModel, notesModel;
+import 'appointments_db_worker.dart';
+import 'appointments_model.dart' show AppointmentsModel, appointmentsModel;
 
-class NotesEntry extends StatelessWidget {
+class AppointmentsEntry extends StatelessWidget {
 
-  NotesEntry() {
+  AppointmentsEntry() {
     _titleEditingController.addListener( () {
-      notesModel.entityBeingEdited.title = _titleEditingController.text;
+      appointmentsModel.entityBeingEdited.title = _titleEditingController.text;
     });
-    _contentEditingController.addListener( () {
-      notesModel.entityBeingEdited.content = _contentEditingController.text;
+    _desctiptionEditingController.addListener( () {
+      appointmentsModel.entityBeingEdited.desctiption = _desctiptionEditingController.text;
     });
   }
 
   final TextEditingController _titleEditingController = TextEditingController();
-  final TextEditingController _contentEditingController = TextEditingController();
+  final TextEditingController _desctiptionEditingController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    _titleEditingController.text = notesModel?.entityBeingEdited?.title ?? '';
-    _contentEditingController.text = notesModel?.entityBeingEdited?.content ?? '';
+    _titleEditingController.text = appointmentsModel?.entityBeingEdited?.title ?? '';
+    _desctiptionEditingController.text = appointmentsModel?.entityBeingEdited?.desctiption ?? '';
     return ScopedModel(
-      model: notesModel,
-      child: ScopedModelDescendant<NotesModel>(
-        builder: (BuildContext inContext, Widget child, NotesModel model) {
+      model: appointmentsModel,
+      child: ScopedModelDescendant<AppointmentsModel>(
+        builder: (BuildContext inContext, Widget child, AppointmentsModel model) {
           return Scaffold(
             bottomNavigationBar: Padding(
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -44,7 +44,7 @@ class NotesEntry extends StatelessWidget {
                   FlatButton(
                     child: Text('Save'),
                     onPressed: () {
-                      _save(inContext, notesModel);
+                      _save(inContext, appointmentsModel);
                     },
                   ),
                 ],
@@ -77,7 +77,7 @@ class NotesEntry extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: "Content",
                       ),
-                      controller: _contentEditingController,
+                      controller: _desctiptionEditingController,
                       validator: (String inValue) {
                         if (inValue == 0) {
                           return "Please enter content";
@@ -87,28 +87,15 @@ class NotesEntry extends StatelessWidget {
                     ),
                   ),
                   ListTile(
-                    leading: Icon(Icons.color_lens),
-                    title: Row(
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () {
-                            notesModel.entityBeingEdited.color = "red";
-                            notesModel.setColor("red");
-                          },
-                          child: Container(
-                            decoration: ShapeDecoration(
-                              shape: Border.all(
-                                width: 18,
-                                color: Colors.red,
-                              ) + Border.all(
-                                width: 6,
-                                color: notesModel.color == "red" ? Colors.red : Theme.of(inContext).canvasColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Spacer(),
-                      ],
+                    leading: Icon(Icons.alarm),
+                    title: Text("Time"),
+                    subtitle: Text(
+                      appointmentsModel.apptTime == null ? "" : appointmentsModel.apptTime
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit),
+                      color: Colors.blue,
+                      onPressed: () => _selectTime(inContext),
                     ),
                   ),
                 ],
@@ -120,26 +107,49 @@ class NotesEntry extends StatelessWidget {
     );
   }
 
-  void _save(BuildContext inContext, NotesModel inModel) async {
+  Future _selectTime(BuildContext inContext) async {
+    TimeOfDay initialTime = TimeOfDay.now();
+    if (appointmentsModel.entityBeingEdited.apptTime != null) {
+      List timeParts = appointmentsModel.entityBeingEdited.apptTime.split(',');
+      initialTime = TimeOfDay(
+        hour: int.parse(
+          timeParts[0],
+        ),
+        minute: int.parse(
+          timeParts[1]
+        ),
+      );
+    }
+    TimeOfDay picked = await showTimePicker(
+      context: inContext,
+      initialTime: initialTime,
+    );
+    if (picked != null) {
+      appointmentsModel.entityBeingEdited.apptTime = '${picked.hour},${picked.minute}';
+      appointmentsModel.setApptTime(picked.format(inContext));
+    }
+  }
+
+  void _save(BuildContext inContext, AppointmentsModel inModel) async {
     if (!_formKey.currentState.validate()) {
       return;
     }
     if (inModel.entityBeingEdited.id == null) {
-      await NotesDBWorker.db.create(
-        notesModel.entityBeingEdited
+      await AppointmentsDBWorker.db.create(
+        appointmentsModel.entityBeingEdited
       );
     } else {
-      await NotesDBWorker.db.update(
-        notesModel.entityBeingEdited
+      await AppointmentsDBWorker.db.update(
+        appointmentsModel.entityBeingEdited
       );
     }
-    notesModel.loadData("notes", NotesDBWorker.db);
+    appointmentsModel.loadData("appointments", AppointmentsDBWorker.db);
     inModel.setStackIndex(0);
     Scaffold.of(inContext).showSnackBar(
       SnackBar(
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
-        content: Text("Note saved"),
+        content: Text("Appointment saved"),
       ),
     );
   }
