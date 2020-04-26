@@ -30,6 +30,13 @@ These components have next file structure:
 
 [Example - contacts component structure](https://github.com/PopovVA/pim/tree/master/lib/screens/contacts)
 
+## Screenshots
+
+<img src="https://raw.githubusercontent.com/PopovVA/repo_images/master/app_calendar.jpg" height="500">
+<img src="https://raw.githubusercontent.com/PopovVA/repo_images/master/app_notes.jpg" height="500">
+<img src="https://raw.githubusercontent.com/PopovVA/repo_images/master/app_tasks.jpg" height="500">
+<img src="https://raw.githubusercontent.com/PopovVA/repo_images/master/edit_note.jpg" height="500">
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
