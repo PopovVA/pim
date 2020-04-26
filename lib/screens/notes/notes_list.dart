@@ -30,7 +30,7 @@ class NotesList extends StatelessWidget {
               itemCount: notesModel.entityList.length,
               itemBuilder: (BuildContext buildContext, int index) {
                 Note note = notesModel.entityList[index];
-                Color color = Colors.white;
+                Color color = Colors.yellow;
                 switch (note.color) {
                   case "red" : color = Colors.red; break;
                   case "green" : color = Colors.green; break;

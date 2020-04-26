@@ -67,7 +67,7 @@ class ContactsEntry extends StatelessWidget {
               child: ListView(
                 children: <Widget>[
                   ListTile(
-                    leading: Icon(Icons.title),
+                    leading: Icon(Icons.image),
                     title: avatarFile.existsSync() ? Image.file(avatarFile) : Text(
                       "No avatar image for this contact"
                     ),
@@ -169,6 +169,9 @@ class ContactsEntry extends StatelessWidget {
                     }
                     Navigator.of(inBuildContext).pop();
                   },
+                ),
+                Divider(
+                  height: 25,
                 ),
                 GestureDetector(
                   child: Text("Select from Gallery"),
