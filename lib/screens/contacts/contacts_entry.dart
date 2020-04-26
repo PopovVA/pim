@@ -170,6 +170,9 @@ class ContactsEntry extends StatelessWidget {
                     Navigator.of(inBuildContext).pop();
                   },
                 ),
+                Divider(
+                  height: 25,
+                ),
                 GestureDetector(
                   child: Text("Select from Gallery"),
                   onTap: () async {
