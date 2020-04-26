@@ -9,7 +9,7 @@ import 'contacts_model.dart' show ContactsModel , contactsModel;
 
 class Contacts extends StatelessWidget {
 
-  Notes() {
+  Contacts() {
     contactsModel.loadData('contacts', ContactsDBWorker.db);
   }
 

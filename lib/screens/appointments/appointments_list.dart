@@ -163,7 +163,7 @@ class AppointmentsList extends StatelessWidget {
                                     margin: EdgeInsets.only(bottom: 8),
                                     color: Colors.grey.shade300,
                                     child: ListTile(
-                                      title: Text("${appointment.desctiption}$apptTime"),
+                                      title: Text("${appointment.title}$apptTime"),
                                       subtitle: appointment.desctiption == null ? null : Text(
                                         '${appointment.desctiption}',
                                       ),
