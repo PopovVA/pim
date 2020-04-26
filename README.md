@@ -15,6 +15,20 @@ Flutter sample project for demonstrate how we can working with [Scoped-model arc
 * [![support](https://img.shields.io/badge/image__picker-%5E0.6.5-brightgreen?style=flat-square)](https://pub.dev/packages/image_picker/versions/0.6.5)
 
 
+## Project structure
+
+The project has 4 main tabs: **Appointments**, **Contacts**, **Notes**, **Tasks**
+
+<img src="https://raw.githubusercontent.com/PopovVA/repo_images/master/tabs.jpg" height="100">
+
+These components have next file structure:
+1. **component.dart** - depending on the changes in the model file, render a new view .
+2. **component_db_worker.dart** - initializing database connection and all queries to database.
+3. **component_entry.dart** - view for adding and editing values.
+4. **component_list.dart** - view with list of data.
+5. **component_model.dart** - contains classes for describing data fields.
+
+[Example - contacts component structure](https://github.com/PopovVA/pim/tree/master/lib/screens/contacts)
 
 ## Getting Started
 
