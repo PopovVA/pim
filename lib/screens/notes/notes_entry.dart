@@ -90,23 +90,17 @@ class NotesEntry extends StatelessWidget {
                     leading: Icon(Icons.color_lens),
                     title: Row(
                       children: <Widget>[
-                        GestureDetector(
-                          onTap: () {
-                            notesModel.entityBeingEdited.color = "red";
-                            notesModel.setColor("red");
-                          },
-                          child: Container(
-                            decoration: ShapeDecoration(
-                              shape: Border.all(
-                                width: 18,
-                                color: Colors.red,
-                              ) + Border.all(
-                                width: 6,
-                                color: notesModel.color == "red" ? Colors.red : Theme.of(inContext).canvasColor,
-                              ),
-                            ),
-                          ),
-                        ),
+                        _buildColorPick(Colors.red, "red", context),
+                        Spacer(),
+                        _buildColorPick(Colors.green, "green", context),
+                        Spacer(),
+                        _buildColorPick(Colors.blue, "blue", context),
+                        Spacer(),
+                        _buildColorPick(Colors.yellow, "yellow", context),
+                        Spacer(),
+                        _buildColorPick(Colors.grey, "grey", context),
+                        Spacer(),
+                        _buildColorPick(Colors.purple, "purple", context),
                         Spacer(),
                       ],
                     ),
@@ -116,6 +110,26 @@ class NotesEntry extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildColorPick(Color color, String colorName, BuildContext inContext) {
+    return GestureDetector(
+      onTap: () {
+        notesModel.entityBeingEdited.color = colorName;
+        notesModel.setColor(colorName);
+      },
+      child: Container(
+        decoration: ShapeDecoration(
+          shape: Border.all(
+            width: 18,
+            color: color,
+          ) + Border.all(
+            width: 6,
+            color: notesModel.color == colorName ? color : Theme.of(inContext).canvasColor,
+          ),
+        ),
       ),
     );
   }
