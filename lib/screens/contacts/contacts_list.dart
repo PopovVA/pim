@@ -66,12 +66,9 @@ class ContactsList extends StatelessWidget {
                             ),
                         ),
                         title: Text(
-                          "${contact.name}"
+                          "${contact?.name ?? ''}"
                         ),
-                        subtitle: contact.phone == null ?
-                        null : Text(
-                          "${contact.phone}"
-                        ),  
+                        subtitle:  Text("${contact?.phone ?? ''}"),
                         onTap: () async {
                           File avatarFile = File(join(utils.docsDir.path, "avatar"));
                           if (avatarFile.existsSync()) {

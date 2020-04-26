@@ -9,7 +9,7 @@ import 'appointments_model.dart' show AppointmentsModel ,appointmentsModel;
 
 class Appointments extends StatelessWidget {
 
-  Notes() {
+  Appointments() {
     appointmentsModel.loadData('appointments', AppointmentsDBWorker.db);
   }
 

@@ -17,6 +17,18 @@ class ContactsEntry extends StatelessWidget {
   final TextEditingController _emailEditController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  ContactsEntry() {
+    _nameEditingController.addListener( () {
+      contactsModel.entityBeingEdited.name = _nameEditingController.text;
+    });
+    _phoneEditController.addListener( () {
+      contactsModel.entityBeingEdited.phone = _phoneEditController.text;
+    });
+    _emailEditController.addListener( () {
+      contactsModel.entityBeingEdited.email = _emailEditController.text;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     _emailEditController.text = contactsModel?.entityBeingEdited?.email ?? '';
@@ -85,7 +97,7 @@ class ContactsEntry extends StatelessWidget {
                       ),
                       controller: _nameEditingController,
                       validator: (String inValue) {
-                        if (inValue?.isNotEmpty ?? false) {
+                        if (inValue?.isEmpty ?? false) {
                           return "Please enter a name";
                         }
                         return null;
