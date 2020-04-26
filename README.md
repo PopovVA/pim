@@ -1,6 +1,9 @@
-# PIM
+# Flutter personal information manager (PIM)
 
-A new Flutter project.
+An example Flutter project with Scoped-model architecture.
+
+## Dependencies
+[![](http://flutter-badge.zaynjarvis.com/version/cupertino_icons)](https://pub.dartlang.org/packages/cupertino_icons)
 
 ## Getting Started
 
