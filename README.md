@@ -2,7 +2,7 @@
 
 [![support](https://img.shields.io/badge/platform-flutter%7Cdart%20vm-ff69b4.svg?style=flat-square)](https://github.com/asjqkkkk/todo-list-app)
 
-Flutter sample project for demonstrate how we can working with [Scoped-model architecture](https://pub.dev/packages/scoped_model).
+Flutter sample project with [Scoped-model architecture](https://pub.dev/packages/scoped_model).
 
 ## Dependencies
 
